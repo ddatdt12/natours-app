@@ -6,8 +6,6 @@ import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 
-console.log('Hello from Parcel ');
-
 const map = document.getElementById('map');
 const loginForm = document.querySelector('.form-login');
 const accountForm = document.querySelector('.form-user-data');

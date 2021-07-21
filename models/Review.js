@@ -57,7 +57,6 @@ Review.statics.calcRatingsAverage = async function(tourId) {
   const ratingsQuantity = stats[0].ratingsQuantity || 0;
   const ratingsAverage = stats[0].ratingsAverage || 4.5;
 
-  console.log(stats);
   try {
     await this.model('Tour').findByIdAndUpdate(tourId, {
       ratingsQuantity,
@@ -75,7 +74,6 @@ Review.post('save', function() {
 Review.pre(/^findOneAnd/, async function(next) {
   //Save updated or deleted Review into query, in order to post(/^findOneAnd/) call calcRatingsAverage()
   this.review = await this.findOne();
-  console.log(this.review);
   next();
 });
 
