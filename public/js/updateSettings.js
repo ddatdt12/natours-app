@@ -4,7 +4,7 @@ import axios from 'axios';
 import { showAlert } from './alerts';
 
 export const updateSettings = async (type, data) => {
-  const url = `http://localhost:3000/api/v1/users/${
+  const url = `/api/v1/users/${
     type === 'password' ? 'updateMyPassword' : 'updateMe'
   } `;
   try {

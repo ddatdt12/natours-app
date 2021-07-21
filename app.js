@@ -1,3 +1,4 @@
+const compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
@@ -49,6 +50,8 @@ app.use(mongoSanitize());
 
 //Data sanitization against XSS
 app.use(xssClean());
+
+app.use(compression());
 
 // 3) ROUTES
 app.use('/', viewsRouter);

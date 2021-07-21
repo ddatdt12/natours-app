@@ -5,9 +5,7 @@ import { showAlert } from './alerts';
 
 export const bookTour = async tourId => {
   try {
-    const res = await axios(
-      `http://localhost:3000/api/v1/bookings/checkout-session/${tourId}`
-    );
+    const res = await axios(`/api/v1/bookings/checkout-session/${tourId}`);
 
     if (res.data.status === 'success') {
       location.assign(res.data.session.url);
