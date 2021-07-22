@@ -29,7 +29,7 @@ const statusChangeCallback = response => {
       {},
       function(res) {
         console.log(res);
-        avatar.src = res.url;
+        avatar.setAttribute('src', res.data.url);
       }
     );
 };
