@@ -49,19 +49,18 @@ app.use(cookieParser());
 app.use(mongoSanitize());
 
 //Data sanitization against XSS
-app.use(xssClean());
 
 app.use(compression());
 
 // CSP error
-app.use((req, res, next) => {
-  res.setHeader(
-    'Content-Security-Policy',
-    "script-src  'self' api.mapbox.com",
-    "script-src-elem 'self' api.mapbox.com"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     'Content-Security-Policy',
+//     "script-src  'self' api.mapbox.com",
+//     "script-src-elem 'self' api.mapbox.com"
+//   );
+//   next();
+// });
 
 // 3) ROUTES
 app.use('/', viewsRouter);

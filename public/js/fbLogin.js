@@ -1,5 +1,6 @@
 /*  eslint-disable  */
 
+const avatar = document.getElementById('avatar');
 console.log('FB logging...');
 window.fbAsyncInit = function() {
   FB.init({
@@ -17,6 +18,18 @@ function checkLoginState() {
     statusChangeCallback(response);
   });
 }
+const statusChangeCallback = response => {
+  console.log(response);
+  if (response.status === 'connected')
+    FB.api(
+      `/${response.authResponse.userID}/picture?type=large`,
+      'GET',
+      {},
+      function(res) {
+        avatar.scr = `${res.url}`;
+      }
+    );
+};
 
 (function(d, s, id) {
   let js,
