@@ -41,7 +41,7 @@ const getInfo = () => {
     },
     function(res) {
       console.log(res);
-      avatar.setAttribute('src', res.picture.data.url);
+      avatar.setAttribute('src', res.data.url);
     }
   );
 };
