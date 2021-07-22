@@ -32,7 +32,7 @@ const statusChangeCallback = response => {
 function testAPI() {
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   console.log('Welcome!  Fetching your information.... ');
-  FB.api('/me', function(response) {
+  FB.api('/me', 'GET', { fields: 'id,name,picture' }, function(response) {
     console.log(response);
     avatar.setAttribute('src', response.picture.data.url);
     console.log('Successful login for: ' + response.name);
