@@ -41,3 +41,8 @@ exports.getMe = (req, res, next) => {
     title: 'My Account'
   });
 };
+exports.getFbLogin = (req, res, next) => {
+  res.status(200).render('loginFB', {
+    title: 'Log in Facebook'
+  });
+};

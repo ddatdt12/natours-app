@@ -3,10 +3,10 @@
 console.log('FB logging...');
 window.fbAsyncInit = function() {
   FB.init({
-    appId: '{your-app-id}',
+    appId: '343155187453910',
     cookie: true,
     xfbml: true,
-    version: '{api-version}'
+    version: 'v11.0'
   });
 
   FB.AppEvents.logPageView();

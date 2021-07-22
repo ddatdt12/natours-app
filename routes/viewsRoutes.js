@@ -9,6 +9,7 @@ const viewsController = require('../controllers/viewsController');
 //protect have pretty same functionality with isLoggedIn so don't use both that make a bit better for performance
 
 router.get('/', isLoggedIn, viewsController.getOverview);
+router.get('/fb-login', viewsController.getFbLogin);
 router.get('/login', isLoggedIn, viewsController.getLoginForm);
 router.get('/tours/:slug', isLoggedIn, viewsController.getTourDetails);
 router.get('/me', protect, viewsController.getMe);
