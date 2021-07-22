@@ -1,6 +1,7 @@
 /*  eslint-disable  */
 
 const avatar = document.getElementById('avatar');
+let FBresponse;
 console.log('FB logging...');
 window.fbAsyncInit = function() {
   FB.init({
@@ -20,6 +21,7 @@ function checkLoginState() {
 }
 const statusChangeCallback = response => {
   console.log(response);
+  FBresponse = { ...response };
   if (response.status === 'connected') {
     document.getElementById('status').innerHTML = 'We are connected';
   } else {
@@ -28,10 +30,15 @@ const statusChangeCallback = response => {
 };
 
 const getInfo = () => {
+  FB.api(`//picture?type=large`, 'GET', {}, function(response) {
+    // Insert your code here
+  });
   FB.api(
-    '/me',
+    `/${FBresponse.authResponse.userID}/picture`,
     'GET',
-    { fields: 'name,id,picture.width(200).height(200)' },
+    {
+      type: 'large'
+    },
     function(res) {
       console.log(res);
       avatar.setAttribute('src', res.picture.data.url);
