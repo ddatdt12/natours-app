@@ -1,7 +1,6 @@
 /*  eslint-disable  */
 
 const avatar = document.getElementById('avatar');
-let FBresponse;
 console.log('FB logging...');
 window.fbAsyncInit = function() {
   FB.init({
@@ -21,30 +20,24 @@ function checkLoginState() {
 }
 const statusChangeCallback = response => {
   console.log(response);
-  FBresponse = { ...response };
   if (response.status === 'connected') {
     document.getElementById('status').innerHTML = 'We are connected';
+    testAPI();
   } else {
-    document.getElementById('status').innerHTML = 'We are not logged in';
+    document.getElementById('status').innerHTML =
+      'Please log ' + 'into this webpage.';
   }
 };
 
-const getInfo = () => {
-  FB.api(
-    `https://graph.facebook.com/v11.0/${
-      FBresponse.authResponse.userID
-    }/picture`,
-    'GET',
-    {
-      type: 'large',
-      redirect: 'false'
-    },
-    function(res) {
-      console.log(res);
-      avatar.setAttribute('src', res.data.url);
-    }
-  );
-};
+function testAPI() {
+  // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+  console.log('Welcome!  Fetching your information.... ');
+  FB.api('/me', function(response) {
+    console.log('Successful login for: ' + response.name);
+    document.getElementById('status').innerHTML =
+      'Thanks for logging in, ' + response.name + '!';
+  });
+}
 (function(d, s, id) {
   let js,
     fjs = d.getElementsByTagName(s)[0];
