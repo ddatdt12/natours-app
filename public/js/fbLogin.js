@@ -31,7 +31,9 @@ const statusChangeCallback = response => {
 
 const getInfo = () => {
   FB.api(
-    `/${FBresponse.authResponse.userID}/picture`,
+    `https://graph.facebook.com/v11.0/${
+      FBresponse.authResponse.userID
+    }/picture`,
     'GET',
     {
       type: 'large'
