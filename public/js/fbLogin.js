@@ -30,9 +30,6 @@ const statusChangeCallback = response => {
 };
 
 const getInfo = () => {
-  FB.api(`//picture?type=large`, 'GET', {}, function(response) {
-    // Insert your code here
-  });
   FB.api(
     `/${FBresponse.authResponse.userID}/picture`,
     'GET',
