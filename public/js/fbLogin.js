@@ -26,7 +26,8 @@ const statusChangeCallback = response => {
       'GET',
       {},
       function(res) {
-        avatar.scr = `${res.url}`;
+        console.log(res);
+        avatar.src = res.url;
       }
     );
 };
