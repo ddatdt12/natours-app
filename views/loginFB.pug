@@ -8,5 +8,7 @@ html(lang="en")
     title Document
   body 
     script(src='/js/fbLogin.js')
-    fb:login-button(scope="public_profile,email" onlogin="checkLoginState();")
-    img#avatar(alt="avatar")
+    fb:login-button(scope="public_profile,email,picture" onlogin="checkLoginState();")
+    #status 
+    button(onClick="getInfo();") getInfo
+    img#avatar(alt="avatar" src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1378339912552934&height=200&width=200&ext=1629546228&hash=AeTaHfhv-qKhTqifpWY")

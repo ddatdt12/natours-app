@@ -20,20 +20,24 @@ function checkLoginState() {
 }
 const statusChangeCallback = response => {
   console.log(response);
-  if (response.status === 'connected')
-    FB.api(
-      `https://graph.facebook.com/v11.0/${
-        response.authResponse.userID
-      }/picture?type=large&redirect=false`,
-      'GET',
-      {},
-      function(res) {
-        console.log(res);
-        avatar.setAttribute('src', res.data.url);
-      }
-    );
+  if (response.status === 'connected') {
+    document.getElementById('status').innerHTML = 'We are connected';
+  } else {
+    document.getElementById('status').innerHTML = 'We are not logged in';
+  }
 };
 
+const getInfo = () => {
+  FB.api(
+    '/me',
+    'GET',
+    { fields: 'name,id,picture.width(200).height(200)' },
+    function(res) {
+      console.log(res);
+      avatar.setAttribute('src', res.picture.data.url);
+    }
+  );
+};
 (function(d, s, id) {
   let js,
     fjs = d.getElementsByTagName(s)[0];
