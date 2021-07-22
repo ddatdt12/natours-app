@@ -22,7 +22,9 @@ const statusChangeCallback = response => {
   console.log(response);
   if (response.status === 'connected')
     FB.api(
-      `/${response.authResponse.userID}/picture?type=large`,
+      `https://graph.facebook.com/v11.0/${
+        response.authResponse.userID
+      }/picture?type=large`,
       'GET',
       {},
       function(res) {
