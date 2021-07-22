@@ -36,7 +36,8 @@ const getInfo = () => {
     }/picture`,
     'GET',
     {
-      type: 'large'
+      type: 'large',
+      redirect: 'false'
     },
     function(res) {
       console.log(res);
