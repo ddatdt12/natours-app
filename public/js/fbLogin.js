@@ -24,7 +24,7 @@ const statusChangeCallback = response => {
     FB.api(
       `https://graph.facebook.com/v11.0/${
         response.authResponse.userID
-      }/picture?type=large`,
+      }/picture?type=large&redirect=false`,
       'GET',
       {},
       function(res) {
