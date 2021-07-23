@@ -36,13 +36,15 @@ exports.getLoginForm = (req, res, next) => {
     title: 'Log in your account'
   });
 };
+
+exports.getSignUpForm = (req, res, next) => {
+  res.status(200).render('signup', {
+    title: 'Register account'
+  });
+};
+
 exports.getMe = (req, res, next) => {
   res.status(200).render('me', {
     title: 'My Account'
-  });
-};
-exports.getFbLogin = (req, res, next) => {
-  res.status(200).render('loginFB', {
-    title: 'Log in Facebook'
   });
 };

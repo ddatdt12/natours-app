@@ -1,13 +1,14 @@
 /*  eslint-disable  */
 
 import '@babel/polyfill';
-import { login, logout } from './login';
+import { login, logout, register } from './login';
 import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 
 const map = document.getElementById('map');
-const loginForm = document.querySelector('.form-login');
+const loginForm = document.getElementById('form-login');
+const registerForm = document.getElementById('register-form');
 const accountForm = document.querySelector('.form-user-data');
 const passwordForm = document.querySelector('.form-user-password');
 const logoutBtn = document.querySelector('.nav__el--logout');
@@ -58,5 +59,18 @@ if (bookTourBtn) {
     const { tourId } = e.target.dataset;
     bookTourBtn.innerText = 'Processing...';
     await bookTour(tourId);
+  });
+}
+
+if (registerForm) {
+  console.log(registerForm);
+  registerForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    console.log(email, name, password, passwordConfirm);
+    register(name, email, password, passwordConfirm);
   });
 }

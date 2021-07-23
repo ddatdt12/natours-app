@@ -24,7 +24,11 @@ app.set('views', path.join(__dirname, 'views'));
 //Serving static file
 app.use(express.static(path.join(__dirname, 'public')));
 //Set security HTTP REQUEST
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false
+  })
+);
 
 if (process.env.NODE_ENV !== 'development') {
   app.use(morgan('dev'));
@@ -32,6 +36,7 @@ if (process.env.NODE_ENV !== 'development') {
 
 // 1) GLOBAL MIDDLEWARES
 
+app.use(xssClean());
 //limit 100 request from same IP  in  1 hour
 const limiter = rateLimit({
   max: 100,
@@ -51,16 +56,6 @@ app.use(mongoSanitize());
 //Data sanitization against XSS
 
 app.use(compression());
-
-// CSP error
-// app.use((req, res, next) => {
-//   res.setHeader(
-//     'Content-Security-Policy',
-//     "script-src  'self' api.mapbox.com",
-//     "script-src-elem 'self' api.mapbox.com"
-//   );
-//   next();
-// });
 
 // 3) ROUTES
 app.use('/', viewsRouter);

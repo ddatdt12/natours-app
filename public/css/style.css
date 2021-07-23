@@ -32,7 +32,6 @@ body {
   font-weight: 300;
   font-family: 'Lato', sans-serif;
   color: #777;
-  padding: 3rem;
   min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -609,6 +608,15 @@ body {
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
 }
+#scroll::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #b8b6b6;
+}
+
+#scroll::-webkit-scrollbar {
+  height: 10px;
+  background-color: #f5f5f5;
+}
 .reviews__card {
   width: 30rem;
   padding: 4rem;
@@ -796,8 +804,8 @@ body {
 }
 
 .footer {
-  background-color: #f7f7f7;
-  padding: 6rem 4rem 3rem 4rem;
+  background-color: #444;
+  padding: 3rem;
   font-size: 1.4rem;
   display: grid;
   grid-template-columns: auto auto;
@@ -836,7 +844,7 @@ body {
   margin-left: 1.5rem;
 }
 .footer__nav a {
-  color: #777;
+  color: #c0bebe;
   text-decoration: none !important;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;

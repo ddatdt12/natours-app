@@ -7,10 +7,10 @@ export const displayMap = locations => {
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/ddatdt12/ckr7mu9et3igz17l2eb9qvcq0',
-    scrollZoom: false
+    scrollZoom: true,
     // center: [-118.113491, 34.111745],
-    // zoom: 10,
-    // interactive: false
+    zoom: 0.001,
+    interactive: true
   });
 
   const bounds = new mapboxgl.LngLatBounds();
@@ -42,8 +42,8 @@ export const displayMap = locations => {
 
   map.fitBounds(bounds, {
     padding: {
-      top: 200,
-      bottom: 150,
+      top: 300,
+      bottom: 300,
       left: 100,
       right: 100
     }

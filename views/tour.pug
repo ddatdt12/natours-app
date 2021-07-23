@@ -73,7 +73,7 @@ block content
     #map(data-locations=`${JSON.stringify(tour.locations)}`)
 
   section.section-reviews
-    .reviews
+    .reviews#scroll
       each review in tour.reviews
         +reviewCard(review)
   section.section-cta

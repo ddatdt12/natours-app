@@ -3,10 +3,11 @@ html
     block head
       meta(charset="UTF-8")
       meta(name="viewport" content="width=device-width, initial-scale=1.0")
-      meta(http-equiv="Content-Security-Policy" content="default-src * data: 'unsafe-eval' 'unsafe-inline'; style-src * 'unsafe-inline'; script-src * 'self' https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *; worker-src 'self' 'unsafe-inline' * blob:;")
+      //- meta(http-equiv="Content-Security-Policy" content="worker-src blob:; child-src blob: gap:;img-src 'self' blob: data:; default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:")
       link(href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700" rel="stylesheet")
       link(rel="stylesheet" href="/css/style.css")
       link(rel="shortcut icon" type="image/png" href="/img/favicon.png")
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
       title Natours | #{title}
 
   body 
