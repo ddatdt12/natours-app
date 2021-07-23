@@ -8,9 +8,10 @@ export const displayMap = locations => {
     container: 'map',
     style: 'mapbox://styles/ddatdt12/ckr7mu9et3igz17l2eb9qvcq0',
     scrollZoom: true,
+    zoom: 1
     // center: [-118.113491, 34.111745],
-    zoom: 0.001,
-    interactive: true
+    // zoom: 0.001,
+    // interactive: true
   });
 
   const bounds = new mapboxgl.LngLatBounds();
@@ -43,9 +44,9 @@ export const displayMap = locations => {
   map.fitBounds(bounds, {
     padding: {
       top: 300,
-      bottom: 300,
-      left: 100,
-      right: 100
+      bottom: 100,
+      left: 300,
+      right: 300
     }
   });
 };

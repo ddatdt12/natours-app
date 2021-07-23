@@ -54,7 +54,6 @@ export const register = async (name, email, password, passwordConfirm) => {
         passwordConfirm
       }
     });
-    console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', 'Register successfully!');
       window.setTimeout(() => {
@@ -62,7 +61,6 @@ export const register = async (name, email, password, passwordConfirm) => {
       }, 1500);
     }
   } catch (error) {
-    console.log(error);
     showAlert('error', error.response.data.message);
   }
 };

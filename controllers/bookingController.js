@@ -1,6 +1,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const Tour = require('../models/Tour');
+const User = require('../models/User');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 
@@ -35,3 +36,35 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     session
   });
 });
+
+const createBooking = async session => {
+  const tourId = session.client_reference_id;
+  const userId = await User.findOne({ email: session.customer_email })._id;
+  const price = session.display_items[0].amount / 100; //Because Currency of  amount in line items is cent
+  await Tour.create({ tour: tourId, user: userId, price });
+};
+//@desc         Booking was created when payment is successful
+//@route        POST /api/v1/tours/webhook-checkout
+//@access       POST
+exports.webhookCheckout = async (req, res, next) => {
+  const signature = req.headers['stripe-signature'];
+
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      signature,
+      process.env.STRIPE_ENDPOINT_SECRET
+    );
+  } catch (err) {
+    res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // Handle the event
+  if (event.type === 'checkout.session.completed')
+    await createBooking(event.data.object); //event.data.object pretty like session when we checkout
+
+  // Return a response to acknowledge receipt of the event
+  res.status(200).json({ received: true });
+};
