@@ -44,7 +44,7 @@ if (process.env.NODE_ENV !== 'development') {
 app.use(cors());
 app.options('*', cors());
 
-app.use(xssClean());
+// app.use(xssClean());
 //limit 100 request from same IP  in  1 hour
 const limiter = rateLimit({
   max: 100,

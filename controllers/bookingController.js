@@ -69,12 +69,12 @@ exports.createBooking = catchAsync(async (req, res, next) => {
   });
 });
 
-// const createCheckoutBooking = async session => {
-//   const tourId = session.client_reference_id;
-//   const userId = await User.findOne({ email: session.customer_email })._id;
-//   const price = session.display_items[0].amount / 100; //Because Currency of  amount in line items is cent
-//   await Booking.create({ tour: tourId, user: userId, price, paid: true });
-// };
+const createCheckoutBooking = async session => {
+  const tourId = session.client_reference_id;
+  const userId = await User.findOne({ email: session.customer_email })._id;
+  const price = session.amount_total / 100; //Because Currency of  amount in line items is cent
+  await Booking.create({ tour: tourId, user: userId, price, paid: true });
+};
 //@desc         Booking was created when payment is successful
 //@route        POST /api/v1/tours/webhook-checkout
 //@access       POST
@@ -93,10 +93,10 @@ exports.webhookCheckout = async (req, res, next) => {
     res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  console.log(event);
+  // console.log(event);
   // Handle the event
-  // if (event.type === 'checkout.session.completed')
-  // await createCheckoutBooking(event.data.object); //event.data.object pretty like session when we checkout
+  if (event.type === 'checkout.session.completed')
+    await createCheckoutBooking(event.data.object); //event.data.object pretty like session when we checkout
 
   // Return a response to acknowledge receipt of the event
   res.status(200).json({ received: true });
