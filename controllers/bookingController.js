@@ -71,7 +71,8 @@ exports.createBooking = catchAsync(async (req, res, next) => {
 
 const createCheckoutBooking = async session => {
   const tourId = session.client_reference_id;
-  const userId = await User.findOne({ email: session.customer_email })._id;
+  const userId = await User.findOne({ email: session.customer_details.email })
+    ._id;
   const price = session.amount_total / 100; //Because Currency of  amount in line items is cent
   await Booking.create({ tour: tourId, user: userId, price, paid: true });
 };
