@@ -1,0 +1,26 @@
+.card-container {
+  display: block;
+}
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.card--data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+}
+.card__picture {
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+  height: 24rem;
+}
+
+.card__details {
+  display: block;
+  padding: 2.5rem 3rem;
+}
+.card__sub-heading {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}

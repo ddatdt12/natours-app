@@ -51,13 +51,19 @@ exports.getMe = (req, res, next) => {
 };
 
 exports.getMyTour = catchAsync(async (req, res, next) => {
-  console.log(req.user);
   const bookings = await Booking.find({ user: req.user._id });
-  console.log(bookings);
-
   const tourIds = bookings.map(booking => booking.tour);
-  const tours = await Tour.find({ _id: { $in: tourIds } });
-  res.status(200).render('my-tour', {
-    title: 'My tours'
+  const tours = await Tour.find({ _id: { $in: tourIds } }).select(
+    '-images -guides -description -locations,'
+  );
+
+  tours.forEach((tour, i) => {
+    tour.bookedAt = bookings[i].createdAt;
+  });
+
+  res.status(200).render('overview', {
+    title: 'My tours',
+    tours,
+    isPersonal: true
   });
 });

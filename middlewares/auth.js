@@ -82,6 +82,11 @@ exports.isLoggedIn = async (req, res, next) => {
   next();
 };
 
+exports.havePermission = (req, res, next) => {
+  if (!req.user) return res.redirect('/login');
+  next();
+};
+
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     // roles ['admin', 'lead-guide']. role='user'
