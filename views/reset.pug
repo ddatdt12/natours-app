@@ -1,0 +1,20 @@
+extend base
+
+block content 
+  main.main
+    .login-form
+      h2.heading-secondary.ma-bt-md Reset your password
+      form.form#reset-form
+        .form__group
+          p.text Enter the email address associated with your account and we'll send you a link to reset your password.
+        .form__group
+          label.form__label(for='email') Email address
+          input#email.form__input(type='email', placeholder='you@example.com', required)
+        .form__group
+          button.btn.btn--green Continue
+        .forget-link
+          a(href="/login") Return to sign in
+      #thanks-letter
+        h1.ma-bt-md Thanks, check your email for instructions to reset your password
+        p.bold-400 Didn't get the email? Check your spam folder or 
+          a.resend-link(href='#') resend

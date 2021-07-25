@@ -50,17 +50,29 @@ exports.getMe = (req, res, next) => {
   });
 };
 
-exports.getMyTour = catchAsync(async (req, res, next) => {
-  const bookings = await Booking.find({ user: req.user._id });
-  const tourIds = bookings.map(booking => booking.tour);
-  const tours = await Tour.find({ _id: { $in: tourIds } }).select(
-    '-images -guides -description -locations,'
-  );
+exports.getResetEmail = (req, res, next) => {
+  res.status(200).render('reset', {
+    title: 'Reset Password'
+  });
+};
 
-  tours.forEach((tour, i) => {
-    tour.bookedAt = bookings[i].createdAt;
+exports.getResetPassword = (req, res, next) => {
+  res.status(200).render('resetpassword', {
+    title: 'Reset Password',
+    token: req.params.token
+  });
+};
+
+exports.getMyTour = catchAsync(async (req, res, next) => {
+  const bookings = await Booking.find({ user: req.user._id }).populate({
+    path: 'tour',
+    select: '-images -guides -description'
   });
 
+  const tours = bookings.map(booking => {
+    const tour = { ...booking.tour.toObject(), bookedAt: booking.createdAt };
+    return tour;
+  });
   res.status(200).render('overview', {
     title: 'My tours',
     tours,

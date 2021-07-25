@@ -6,6 +6,7 @@ import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
+import { sendResetEmail, resetPassword } from './resetPasswordFunc';
 
 const map = document.getElementById('map');
 const loginForm = document.getElementById('form-login');
@@ -14,11 +15,6 @@ const accountForm = document.querySelector('.form-user-data');
 const passwordForm = document.querySelector('.form-user-password');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const bookTourBtn = document.getElementById('book-tour');
-
-if (map) {
-  const locations = JSON.parse(map.dataset.locations);
-  displayMap(locations);
-}
 
 if (loginForm) {
   loginForm.addEventListener('submit', e => {
@@ -79,4 +75,49 @@ if (registerForm) {
 const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) {
   showAlert('success', alertMessage, 20);
+}
+
+const resetForm = document.getElementById('reset-form');
+const thanksLetter = document.getElementById('thanks-letter');
+if (resetForm) {
+  resetForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const status = sendResetEmail(email);
+    if (status === 'success') {
+      window.setTimeout(() => {
+        resetForm.style.display = 'none';
+        thanksLetter.style.display = 'block';
+      }, 1000);
+    }
+  });
+}
+
+// if (thanksLetter) {
+// }
+
+const resetPasswordForm = document.getElementById('reset-password-form');
+
+if (resetPasswordForm) {
+  const token = resetPasswordForm.dataset.token;
+  resetPasswordForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const newPassword = document.getElementById('new-password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+    resetPassword(newPassword, passwordConfirm, token);
+  });
+}
+
+if (map) {
+  const locations = JSON.parse(map.dataset.locations);
+
+  const mapMobile = window.matchMedia('(max-width: 800px)');
+
+  if (mapMobile.matches) displayMap(locations, 100, 100, 100, 200);
+  else displayMap(locations);
+
+  mapMobile.addEventListener('change', () => {
+    if (mapMobile.matches) displayMap(locations, 100, 100, 100, 200);
+    else displayMap(locations);
+  });
 }

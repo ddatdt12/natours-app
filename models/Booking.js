@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const BookingModel = mongoose.Schema(
+const BookingSchema = mongoose.Schema(
   {
     tour: {
       type: mongoose.Schema.ObjectId,
@@ -28,12 +28,18 @@ const BookingModel = mongoose.Schema(
   }
 );
 
-BookingModel.pre(/^find/, function(next) {
-  this.populate('user').populate({
-    path: 'tour',
-    select: 'name '
-  });
+// BookingSchema.pre(/^find/, function(next) {
+// this.populate('user')
+// .populate({
+//   path: 'tour',
+//   select: 'name '
+// });
+//   next();
+// });
+
+BookingSchema.pre(/^find/, function(next) {
+  // this.sort('-createdAt');
+  // console.log('test');
   next();
 });
-
-module.exports = mongoose.model('Booking', BookingModel);
+module.exports = mongoose.model('Booking', BookingSchema);

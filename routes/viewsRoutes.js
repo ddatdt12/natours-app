@@ -11,6 +11,8 @@ const viewsController = require('../controllers/viewsController');
 router.use(haveAlerts);
 
 router.get('/', isLoggedIn, viewsController.getOverview);
+router.get('/reset', viewsController.getResetEmail);
+router.get('/reset-password/:token', viewsController.getResetPassword);
 router.get('/login', isLoggedIn, viewsController.getLoginForm);
 router.get('/signup', isLoggedIn, viewsController.getSignUpForm);
 router.get('/tours/:slug', isLoggedIn, viewsController.getTourDetails);
