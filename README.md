@@ -2,7 +2,7 @@
 
 > A travel tour booking web app built in Node.js, Express, MongoDB and Mongoose, HTML, CSS, Pug
 
-##Demo
+## Demo
 
 [Travel Natours](https://travel-natours.herokuapp.com/)
 
